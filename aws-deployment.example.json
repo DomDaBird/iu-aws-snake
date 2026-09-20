@@ -1,0 +1,10 @@
+{
+  "profile": "YOUR_AWS_PROFILE",
+  "region": "eu-central-1",
+  "stackName": "iu-snake",
+  "projectName": "iu-snake",
+  "creditCheckedOn": "YYYY-MM-DD",
+  "creditRemainingUsd": 100,
+  "plannedSpendUsd": 5,
+  "freePlanExpiresOn": "YYYY-MM-DD"
+}

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101412"><title>Snake Arcade</title><meta name="description" content="Futter schnappen, länger werden, Highscore knacken. Spiele Snake klassisch oder ohne Wände."><link rel="stylesheet" href="/style.css"><script type="module" src="/game.js"></script></head>
+<body><main>
+  <header><div><p class="eyebrow">ARCADE · PLAYER ONE</p><h1>Snake<span>.</span></h1></div></header>
+  <div class="layout"><section class="play" aria-label="Snake spielen">
+    <div class="scorebar"><span>PUNKTE <strong id="score">0</strong></span><span id="state">Bereit?</span></div>
+    <div class="board"><canvas id="board" width="600" height="600" tabindex="0" aria-label="Snake-Spielfeld. Mit Pfeiltasten steuern. Leertaste pausiert."></canvas><div id="overlay"><h2 id="overlay-title">Los geht’s.</h2><p id="overlay-text">Futter sammeln. Wände meiden.</p></div></div>
+    <div class="game-options"><button id="walls" class="secondary" aria-pressed="true" aria-describedby="wall-hint">Wände: AN</button><span id="wall-hint">Klassisch: Am Rand ist Schluss.</span></div>
+    <div class="controls"><button id="start">Spiel starten</button><button id="pause" class="secondary" disabled>Pause</button><label id="initials-field" hidden>KÜRZEL <input id="initials" type="text" value="AAA" maxlength="3" pattern="[A-Za-z]{3}" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Drei Buchstaben für deinen Highscore"></label><button id="save" class="secondary" hidden>Ergebnis speichern</button></div>
+    <p class="instructions">Pfeiltasten: steuern. Leertaste: Pause.</p>
+    <p id="message" class="message" role="status" aria-live="polite"></p>
+  </section>
+  <aside><div class="leader-heading"><h2>Highscores</h2><button id="refresh" class="text-button" aria-label="Bestenliste aktualisieren">↻</button></div><p id="mode" class="muted" role="status" hidden></p><p id="leader-rules" class="leader-rules">KLASSISCH</p><ol id="leaders"></ol><div class="tip"><strong>Keine Münzen nötig.</strong><p>Ein Snack. Ein Punkt. Und immer genug Platz für einen neuen Rekord.</p></div></aside></div>
+  <footer>SNAKE ARCADE · INSERT NO COIN <span>Dominik Vogel</span></footer>
+</main></body></html>

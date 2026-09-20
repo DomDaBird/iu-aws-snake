@@ -1,0 +1,35 @@
+flowchart LR
+    browser["Browser / globale Nutzer:innen
+Snake läuft clientseitig"]
+    subgraph global["AWS: globale Auslieferung"]
+        cf["Amazon CloudFront
+HTTPS / Security Header
+Routing und statischer Cache"]
+    end
+    subgraph regional["AWS: eu-central-1 / Frankfurt"]
+        s3[("Amazon S3, privat
+HTML / CSS / JavaScript
+Block Public Access")]
+        gateway["API Gateway HTTP API
+GET und POST /api/scores
+Rate 10/s, Burst 20"]
+        lambda["AWS Lambda
+Node.js 24, arm64
+128 MB, Timeout 5 s"]
+        db[("Amazon DynamoDB
+On-Demand
+Scores und Receipts")]
+    end
+    browser -->|HTTPS| cf
+    cf -->|"Standardpfad: HTTPS + OAC / SigV4"| s3
+    cf -->|"/api/*: HTTPS, kein API-Cache"| gateway
+    gateway -->|"Lambda-Integration / Invoke"| lambda
+    lambda -->|"HTTPS / IAM: GetItem, Query, PutItem"| db
+    management["Managementebene
+CloudFormation + AWS CLI + aws-publish.py
+Plan / Change Set prüfen / Apply / Artefakte veröffentlichen"]
+    management -. "verwaltet" .-> global
+    management -. "verwaltet" .-> regional
+    legend["Legende: durchgezogen = Anfragefluss, Antwort auf gleichem Weg
+gestrichelt = Management, außerhalb des Request-Pfads
+Regionales Backend, keine Multi-Region-Ausfallsicherheit"]
